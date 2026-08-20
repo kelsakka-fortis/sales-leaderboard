@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="1800">
+<title>Fortis Sales Leaderboard</title>
+<style>
+  :root{
+    color-scheme: light;
+    --bg-0:#ffffff;
+    --bg-1:#f6f4ff;
+    --line:rgba(28,10,85,0.10);
+    --text-0:#1c0a55;
+    --text-1:#564d80;
+    --text-2:#8b83ad;
+    --gold:#f4c04d;
+    --silver:#aab0c4;
+    --bronze:#e0a56f;
+    --violet:#6c3fce;
+    --violet-2:#a58aef;
+    --lime-2:#cfe3ba;
+    --ink:#1c0a55;
+    --revenue-grad: linear-gradient(90deg,#5c8a3c,#93b56b);
+    --deals-grad: linear-gradient(90deg,#6c3fce,#a58aef);
+    font-size: clamp(12px, 1.05vw, 26px);
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; padding:0; height:100%; width:100%;
+    background:
+      radial-gradient(ellipse at 12% 0%, rgba(111,156,70,0.12), transparent 45%),
+      radial-gradient(ellipse at 88% 100%, rgba(108,63,206,0.12), transparent 45%),
+      linear-gradient(180deg, var(--bg-0), var(--bg-1) 55%, var(--bg-0));
+    color:var(--text-0);
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    overflow:hidden;
+  }
+  .stage{ width:100vw; height:100vh; display:flex; flex-direction:column; padding:1.6rem 2.4rem 1.2rem; }
+
+  header{ display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:1rem; margin-bottom:1.1rem; border-bottom:1px solid var(--line); flex:0 0 auto; }
+  .brand{ display:flex; align-items:center; gap:1.1rem; }
+  .brand .logo{ height:2.3rem; width:auto; flex:0 0 auto; }
+  .brand .brand-text{ display:flex; flex-direction:column; gap:.2rem; }
+  .brand .eyebrow{ font-size:.78rem; letter-spacing:.35em; color:var(--text-2); text-transform:uppercase; font-weight:700; }
+  .brand h1{ margin:0; font-size:2.5rem; font-weight:800; letter-spacing:.01em;
+    background: linear-gradient(90deg, #1c0a55, #6c3fce 60%, #5c8a3c);
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .scope{ text-align:right; color:var(--text-1); font-size:.95rem; line-height:1.5; }
+  .scope b{ color:var(--text-0); }
+  .scope .pill{ display:inline-block; margin-top:.35rem; padding:.25rem .8rem; border:1px solid transparent; border-radius:999px; font-size:.75rem; font-weight:700; color:var(--ink); background:var(--lime-2); }
+
+  .grid{ flex:1 1 auto; display:grid; grid-template-columns:1fr 1fr; gap:2rem; min-height:0; }
+  .col{ display:flex; flex-direction:column; min-height:0; background:#fff; border:1px solid var(--line); border-radius:1.1rem; padding:1.2rem 1.5rem; position:relative; overflow:hidden; box-shadow:0 18px 40px -24px rgba(28,10,85,0.25); }
+  .col.revenue{ border-color:rgba(111,156,70,0.35); }
+  .col.deals{ border-color:rgba(108,63,206,0.3); }
+  .col-title{ display:flex; align-items:center; gap:.6rem; flex:0 0 auto; margin-bottom:.9rem; }
+  .col-title .icon{ width:2.1rem; height:2.1rem; border-radius:.6rem; display:flex; align-items:center; justify-content:center; font-size:1.15rem; flex:0 0 auto; }
+  .revenue .col-title .icon{ background:var(--revenue-grad); color:var(--ink); }
+  .deals .col-title .icon{ background:var(--deals-grad); color:#fff; }
+  .col-title h2{ margin:0; font-size:1.35rem; font-weight:700; color:var(--text-0); }
+  .col-title span.sub{ color:var(--text-2); font-size:.8rem; font-weight:500; margin-left:.3rem; }
+
+  .podium{ display:grid; grid-template-columns:1fr 1.3fr 1fr; gap:.8rem; align-items:end; flex:0 0 auto; margin-bottom:1.1rem; min-height:6.5rem; }
+  .p-card{ border-radius:.9rem; padding:.8rem .9rem; position:relative; border:1px solid var(--line); background:linear-gradient(180deg,#fbfaff,#f3f0ff); text-align:center; }
+  .p-card .rank{ position:absolute; top:-.55rem; left:50%; transform:translateX(-50%); font-size:.72rem; font-weight:800; padding:.15rem .55rem; border-radius:999px; letter-spacing:.05em; }
+  .p-card.gold{ order:2; padding-top:1.3rem; box-shadow:0 0 0 1px rgba(244,192,77,.5), 0 18px 40px -14px rgba(244,192,77,.4); }
+  .p-card.gold .rank{ background:var(--gold); color:#241300; }
+  .p-card.silver{ order:1; } .p-card.silver .rank{ background:var(--silver); color:#fff; }
+  .p-card.bronze{ order:3; } .p-card.bronze .rank{ background:var(--bronze); color:#241300; }
+  .p-card .medal{ font-size:1.4rem; margin-bottom:.15rem; } .p-card.gold .medal{ font-size:1.9rem; }
+  .p-card .name{ font-weight:700; font-size:.92rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text-0); }
+  .p-card.gold .name{ font-size:1.15rem; }
+  .p-card .value{ font-weight:800; font-size:1.1rem; margin-top:.2rem; } .p-card.gold .value{ font-size:1.6rem; }
+  .revenue .p-card.gold .value{ background:var(--revenue-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .deals .p-card.gold .value{ background:var(--deals-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .revenue .p-card:not(.gold) .value{ color:#4f7a2c; }
+  .deals .p-card:not(.gold) .value{ color:var(--violet); }
+
+  .chart{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column; gap:.42rem; justify-content:space-between; padding-top:.2rem; }
+  .bar-row{ display:grid; grid-template-columns:8.5rem 1fr 4.6rem; align-items:center; gap:.6rem; opacity:0; transform:translateX(-8px); animation:rise .5s ease forwards; }
+  .bar-row .rank-badge{ width:1.15rem; height:1.15rem; border-radius:50%; font-size:.62rem; font-weight:800; display:flex; align-items:center; justify-content:center; flex:0 0 auto; margin-right:.35rem; }
+  .bar-row.top1 .rank-badge{ background:var(--gold); color:#241300; }
+  .bar-row.top2 .rank-badge{ background:var(--silver); color:#fff; }
+  .bar-row.top3 .rank-badge{ background:var(--bronze); color:#241300; }
+  .bar-row:not(.top1):not(.top2):not(.top3) .rank-badge{ background:rgba(28,10,85,0.08); color:var(--text-2); }
+  .bar-row .agent-label{ display:flex; align-items:center; font-size:.78rem; color:var(--text-1); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .bar-row.top1 .agent-label, .bar-row.top2 .agent-label, .bar-row.top3 .agent-label{ color:var(--text-0); font-weight:600; }
+  .track{ position:relative; height:.62rem; background:rgba(28,10,85,0.07); border-radius:999px; overflow:hidden; }
+  .fill{ position:absolute; left:0; top:0; bottom:0; width:0; border-radius:999px; transition:width 1.1s cubic-bezier(.2,.8,.2,1); }
+  .revenue .fill{ background:var(--revenue-grad); }
+  .deals .fill{ background:var(--deals-grad); }
+  .revenue .bar-row.top1 .fill{ box-shadow:0 0 10px rgba(92,138,60,.5); }
+  .deals .bar-row.top1 .fill{ box-shadow:0 0 10px rgba(108,63,206,.55); }
+  .bar-row .val{ font-size:.78rem; font-weight:700; text-align:right; color:var(--text-0); }
+  @keyframes rise{ to{ opacity:1; transform:translateX(0);} }
+
+  .empty-state{ flex:1; display:flex; align-items:center; justify-content:center; color:var(--text-2); font-size:.85rem; text-align:center; padding:2rem; }
+
+  footer{ flex:0 0 auto; margin-top:1rem; display:flex; justify-content:space-between; color:var(--text-2); font-size:.72rem; border-top:1px solid var(--line); padding-top:.7rem; }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <header>
+    <div class="brand">
+      <img class="logo" alt="Fortis" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALAAAAA/CAYAAABAUUJTAAAGkUlEQVR4nO2dPZKjPBCGm609x1yAiMxUzTGmmJzcASdw+QQEzslN+RhTZWdEXGAuwhcY+ZNlSaj1A621nmxqvaCfl1ar1ZKyaZogkYiVP1sXIJFwIQk4ETVJwImo+RviobdhnNquf/x9Hcanfy+LHHZFDgAATV1lIcqQwMP323UYH/1EuY8yX5M4VnlRrEv0pyPsipxsA70L3/vDpOu7pq5ICtmLBW67/sniYrgO48MaJ7bh4/Nr0YrN/TtRE7GzD/y9P1iLN7E9bdcbD8Ft18NtGEnFXZ0E/PH5pR12ErQR5yomUDNW1gL+3h9IfYkJPDbGh5rBshJw2/XJ8r4xlNwIWwH7LkciIihFjdBRCIzTn3DjNoxGI90cr0WLqixyaK1KRgcbATu9sCxycn4UVar9weh3tyKH8+kYuDR3mrpa5T2moARs4/uU95UcAHgdem7DOFEajmLF1iDsijxr6goViaAWB0YJGNtQS6s3Sbzb09RVZuqqULO+AIGTeah9rQk559Mx04mzLHLoT0eS/RkkmQeA5teaUNPUVdbU1WOSfpuX+G0niGuB9YFDlSNBBIpWVkfKB05ETTABlynDLLECyQInokbqA/tY657DMovPsZ0gsDLyOwhEQuz8MG0bVb1YyIrNJ/hcaJcympRLVyaTd9j0lVhfAL87dF52ZJgkN/sEuyPDducHADhvkcEk7osx8KVyl/fVtKdyheiL35/LS91N3yMrowqXfsLs/tjchTCt4G0Yp+/9Yar2B+uVp+swQtv18PH5NYXO6eAtTtv1i+Vea3ldtLa+M8t89BOmj4LFgX2ytF/LhrW2yLhst4qN2zBOpvkbJrAdIDqrv7kF1sG+5lDWqe36oIn5SbzuXIdR20dkBcwaJPTQeh1G+Pj8mkIkab+LeAHMM+ds0ImYrIB9NAifCbeEb7G9U8roGjniqp3rJH1g12GdCZdFN0yyrdhXbjrLTvxP6JFGF6kiZ4Fd99s1dQXn0zHjK2x67sQcpUg7ThCEbC+WBacLs74IeMslYJtt3iZgIg0Uzz7wydaZZf3pCL8/l+z355LNKZpSzbGY81J5X1yI8+mYqToQE5hWFUyEL6APv1GVMYfZytR2/WpbdHzRR1Be3q0DuPc9Gx35iA1mIUPqA2tUb2yZsHmkNiEntrImHiQo26rU1BVcDSeGqme4wMrKtwvvm7uOfFtZVl8ptk1dZWWRTwC4upCcxJnA+0ZlkT/FIGUWdFfkWVnkxv61TyusWoLlLVCs7JAjG2gWj2w+QjKTOIz1FR17seKqBt1CLGxSufqLVwI7cvDLxD7mGiQEjKmIyjURG1L2TExjMzfC+D8oiG2Hw1q0XQ/V/vAQs200g4SAMZM3lbDEBQsKCwlpX6AZbddbW2YSAsZi4m74mFy4fgTvYH3nsyW8PY9ZZlOLHKWAZZhMALaOgf6rzBEEr680xVKkgIOAdu5Fq6oCV4kJH2ZaBTuizzoumzYcnwUKSCgYAy++cAAAAASUVORK5CYII=">
+      <div class="brand-text">
+        <div class="eyebrow">Sales Performance</div>
+        <h1>Sales Leaderboard</h1>
+      </div>
+    </div>
+    <div class="scope">
+      <div><b>August 2026</b> · <span class="pill">Snapshot</span></div>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="col revenue" id="col-revenue">
+      <div class="col-title">
+        <div class="icon">$</div>
+        <h2>Revenue per Agent</h2>
+        <span class="sub">Total won amount, AED</span>
+      </div>
+      <div class="podium" id="podium-revenue"></div>
+      <div class="chart" id="chart-revenue"></div>
+    </section>
+
+    <section class="col deals" id="col-deals">
+      <div class="col-title">
+        <div class="icon">✓</div>
+        <h2>Deals Won per Agent</h2>
+        <span class="sub">Count of closed-won deals</span>
+      </div>
+      <div class="podium" id="podium-deals"></div>
+      <div class="chart" id="chart-deals"></div>
+    </section>
+  </div>
+
+  <footer>
+    <span>Source: HubSpot CRM · Main Pipeline · won_time_pd within current month</span>
+    <span id="totals">—</span>
+  </footer>
+</div>
+
+<script id="snapshot-data" type="application/json">
+{
+  "generatedAtUtc": "2026-08-20T13:55:44Z",
+  "monthLabel": "August 2026",
+  "revenueData": [
+    {"name":"Arun Simon","value":16198.93},
+    {"name":"Rahul Raj","value":14093.00},
+    {"name":"Abdelaziz Elrayes","value":6684.76},
+    {"name":"Aditya Jaiswal","value":4487.00},
+    {"name":"Donaldo Oroncillo","value":3778.00},
+    {"name":"Mayas Alkurdi","value":2270.00},
+    {"name":"Peter Tawfik","value":2070.00},
+    {"name":"Ramy Salama","value":2030.00},
+    {"name":"Saif Diab","value":1955.00},
+    {"name":"Mustufa Ahmad","value":990.00},
+    {"name":"Hala Shehab","value":850.00},
+    {"name":"Ameen Kavil","value":450.00},
+    {"name":"Aditya Kumar","value":199.00},
+    {"name":"Yassin hesham","value":199.00},
+    {"name":"Safaa Abuhejleh","value":199.00},
+    {"name":"Ahmed Mustafa","value":50.00},
+    {"name":"Ahmed Killany","value":50.00}
+  ],
+  "dealsData": [
+    {"name":"Donaldo Oroncillo","value":29},
+    {"name":"Peter Tawfik","value":21},
+    {"name":"Aditya Jaiswal","value":18},
+    {"name":"Rahul Raj","value":14},
+    {"name":"Hala Shehab","value":14},
+    {"name":"Arun Simon","value":11},
+    {"name":"Saif Diab","value":11},
+    {"name":"Abdelaziz Elrayes","value":4},
+    {"name":"Mustufa Ahmad","value":3},
+    {"name":"Ameen Kavil","value":3},
+    {"name":"Mayas Alkurdi","value":2},
+    {"name":"Ramy Salama","value":1},
+    {"name":"Aditya Kumar","value":1},
+    {"name":"Yassin hesham","value":1},
+    {"name":"Safaa Abuhejleh","value":1},
+    {"name":"Ahmed Mustafa","value":1},
+    {"name":"Ahmed Killany","value":1}
+  ]
+}
+</script>
+<script>
+// ---- STATIC SNAPSHOT RENDERER ----
+// This page shows a baked-in snapshot pushed by a recurring job that re-pulls
+// HubSpot and re-publishes this file. It refreshes itself (via the meta-refresh
+// tag above) every 30 minutes to pick up the newest published snapshot from
+// GitHub Pages — it does not call any API directly from the browser.
+
+const snapshot = JSON.parse(document.getElementById("snapshot-data").textContent);
+
+function fmtMoney(v){ return "AED " + v.toLocaleString(undefined, { maximumFractionDigits: 0 }); }
+function fmtCount(v){ return v + (v === 1 ? " deal" : " deals"); }
+
+function pad3(list){
+  const out = list.slice(0, 3);
+  while (out.length < 3) out.push({ name: "—", value: 0 });
+  return out;
+}
+
+function buildPodium(containerId, data, formatter){
+  const el = document.getElementById(containerId);
+  const [first, second, third] = pad3(data);
+  const medals = { gold: "🥇", silver: "🥈", bronze: "🥉" };
+  el.innerHTML = `
+    <div class="p-card silver">
+      <div class="rank">RUNNER-UP</div><div class="medal">${medals.silver}</div>
+      <div class="name">${second.name}</div><div class="value">${formatter(second.value)}</div>
+    </div>
+    <div class="p-card gold">
+      <div class="rank">TOP PERFORMER</div><div class="medal">${medals.gold}</div>
+      <div class="name">${first.name}</div><div class="value">${formatter(first.value)}</div>
+    </div>
+    <div class="p-card bronze">
+      <div class="rank">RUNNER-UP</div><div class="medal">${medals.bronze}</div>
+      <div class="name">${third.name}</div><div class="value">${formatter(third.value)}</div>
+    </div>`;
+}
+
+function buildChart(containerId, data, formatter){
+  const el = document.getElementById(containerId);
+  if (data.length === 0){
+    el.innerHTML = `<div class="empty-state">No won deals recorded yet this month.</div>`;
+    return;
+  }
+  const max = data[0].value || 1;
+  el.innerHTML = data.map((d,i)=>{
+    const cls = i===0?"top1":i===1?"top2":i===2?"top3":"";
+    const pct = Math.max((d.value/max*100), 2);
+    return `
+      <div class="bar-row ${cls}" style="animation-delay:${i*35}ms">
+        <div class="agent-label"><span class="rank-badge">${i+1}</span>${d.name}</div>
+        <div class="track"><div class="fill" data-w="${pct}"></div></div>
+        <div class="val">${formatter(d.value)}</div>
+      </div>`;
+  }).join("");
+  requestAnimationFrame(()=>{
+    setTimeout(()=>{
+      el.querySelectorAll(".fill").forEach(f => { f.style.width = f.dataset.w + "%"; });
+    }, 150);
+  });
+}
+
+buildPodium("podium-revenue", snapshot.revenueData, fmtMoney);
+buildPodium("podium-deals", snapshot.dealsData, fmtCount);
+buildChart("chart-revenue", snapshot.revenueData, fmtMoney);
+buildChart("chart-deals", snapshot.dealsData, fmtCount);
+
+const totalRevenue = snapshot.revenueData.reduce((s,d)=>s+d.value, 0);
+const totalDeals = snapshot.dealsData.reduce((s,d)=>s+d.value, 0);
+const generated = new Date(snapshot.generatedAtUtc);
+document.getElementById("totals").textContent =
+  "Total: " + fmtMoney(totalRevenue) + " · " + totalDeals + " deals won · Snapshot pushed " +
+  generated.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+</script>
+</body>
+</html>
