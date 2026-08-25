@@ -24,7 +24,9 @@
     --payments-grad: linear-gradient(90deg,#6c3fce,#a58aef);
     --callcenter-grad: linear-gradient(90deg,#c77b3a,#e0a56f);
     --outbound-grad: linear-gradient(90deg,#2f7ea8,#7fc0e0);
-    font-size: clamp(11px, 0.95vw, 24px);
+    --revenue-hero-grad: linear-gradient(135deg,#5c8a3c,#2f7ea8);
+    --deals-hero-grad: linear-gradient(135deg,#6c3fce,#c77b3a);
+    font-size: clamp(10px, 0.9vw, 22px);
   }
   *{box-sizing:border-box;}
   html,body{
@@ -37,55 +39,65 @@
     font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     overflow:hidden;
   }
-  .stage{ width:100vw; height:100vh; display:flex; flex-direction:column; padding:1.5rem 2.2rem 1.1rem; }
-  header{ display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:.9rem; margin-bottom:1rem; border-bottom:1px solid var(--line); flex:0 0 auto; }
-  .brand{ display:flex; align-items:center; gap:1.1rem; }
-  .brand .logo{ height:2.2rem; width:auto; flex:0 0 auto; }
-  .brand .brand-text{ display:flex; flex-direction:column; gap:.2rem; }
-  .brand .eyebrow{ font-size:.75rem; letter-spacing:.35em; color:var(--text-2); text-transform:uppercase; font-weight:700; }
-  .brand h1{ margin:0; font-size:2.3rem; font-weight:800; letter-spacing:.01em;
+  .stage{ width:100vw; height:100vh; display:flex; flex-direction:column; padding:1.1rem 2rem .9rem; }
+  header{ display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:.6rem; margin-bottom:.7rem; border-bottom:1px solid var(--line); flex:0 0 auto; }
+  .brand{ display:flex; align-items:center; gap:1rem; }
+  .brand .logo{ height:1.9rem; width:auto; flex:0 0 auto; }
+  .brand .brand-text{ display:flex; flex-direction:column; gap:.15rem; }
+  .brand .eyebrow{ font-size:.68rem; letter-spacing:.32em; color:var(--text-2); text-transform:uppercase; font-weight:700; }
+  .brand h1{ margin:0; font-size:1.9rem; font-weight:800; letter-spacing:.01em;
     background: linear-gradient(90deg, #1c0a55, #6c3fce 60%, #5c8a3c);
     -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .scope{ text-align:right; color:var(--text-1); font-size:.92rem; line-height:1.5; }
+  .scope{ text-align:right; color:var(--text-1); font-size:.85rem; line-height:1.4; }
   .scope b{ color:var(--text-0); }
-  .scope .pill{ display:inline-block; margin-top:.35rem; padding:.25rem .8rem; border:1px solid transparent; border-radius:999px; font-size:.72rem; font-weight:700; color:var(--ink); background:var(--lime-2); }
-  .grid{ flex:1 1 auto; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:1.3rem; min-height:0; }
-  .col{ display:flex; flex-direction:column; min-height:0; background:#fff; border:1px solid var(--line); border-radius:1.1rem; padding:1.05rem 1.35rem; position:relative; overflow:hidden; box-shadow:0 18px 40px -24px rgba(28,10,85,0.25); }
+  .scope .pill{ display:inline-block; margin-top:.3rem; padding:.2rem .7rem; border:1px solid transparent; border-radius:999px; font-size:.66rem; font-weight:700; color:var(--ink); background:var(--lime-2); }
+  .hero{ flex:0 0 auto; display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:.8rem; }
+  .hero-card{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:.7rem; border-radius:.9rem; padding:.55rem 1rem; color:#fff; box-shadow:0 14px 30px -16px rgba(28,10,85,0.35); }
+  .hero-card.revenue-hero{ background:var(--revenue-hero-grad); }
+  .hero-card.deals-hero{ background:var(--deals-hero-grad); }
+  .hero-card .hero-medal{ font-size:1.5rem; flex:0 0 auto; }
+  .hero-card .hero-mid{ min-width:0; }
+  .hero-card .hero-label{ font-size:.62rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; opacity:.85; }
+  .hero-card .hero-name{ font-size:1.08rem; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .hero-card .hero-team{ font-size:.66rem; font-weight:600; opacity:.8; }
+  .hero-card .hero-value{ font-size:1.3rem; font-weight:800; text-align:right; white-space:nowrap; }
+  .grid{ flex:1 1 auto; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:1rem; min-height:0; }
+  .col{ display:flex; flex-direction:column; min-height:0; background:#fff; border:1px solid var(--line); border-radius:1rem; padding:.75rem 1.1rem; position:relative; overflow:hidden; box-shadow:0 18px 40px -24px rgba(28,10,85,0.25); }
   .col.vas{ border-color:rgba(111,156,70,0.35); }
   .col.payments{ border-color:rgba(108,63,206,0.3); }
   .col.callcenter{ border-color:rgba(224,165,111,0.5); }
   .col.outbound{ border-color:rgba(47,126,168,0.35); }
-  .col-title{ display:flex; align-items:center; gap:.55rem; flex:0 0 auto; margin-bottom:.7rem; }
-  .col-title .icon{ width:1.9rem; height:1.9rem; border-radius:.55rem; display:flex; align-items:center; justify-content:center; font-size:1.02rem; flex:0 0 auto; color:#fff; }
+  .col-title{ display:flex; align-items:center; gap:.5rem; flex:0 0 auto; margin-bottom:.45rem; }
+  .col-title .icon{ width:1.6rem; height:1.6rem; border-radius:.5rem; display:flex; align-items:center; justify-content:center; font-size:.9rem; flex:0 0 auto; color:#fff; }
   .vas .col-title .icon{ background:var(--vas-grad); }
   .payments .col-title .icon{ background:var(--payments-grad); }
   .callcenter .col-title .icon{ background:var(--callcenter-grad); }
   .outbound .col-title .icon{ background:var(--outbound-grad); }
-  .col-title h2{ margin:0; font-size:1.18rem; font-weight:700; color:var(--text-0); }
-  .col-title span.sub{ color:var(--text-2); font-size:.74rem; font-weight:600; margin-left:.3rem; text-transform:uppercase; letter-spacing:.04em; }
-  .rows{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column; gap:.26rem; justify-content:center; }
-  .row{ display:grid; grid-template-columns:1.5rem 1fr auto; align-items:center; gap:.55rem; padding:.28rem .55rem; border-radius:.55rem; background:linear-gradient(180deg,#fbfaff,#f5f3ff); border:1px solid var(--line); opacity:0; transform:translateY(6px); animation:rise .5s ease forwards; }
-  .row.zero{ opacity:.55 !important; background:transparent; border-style:dashed; }
-  .row.rank1{ box-shadow:0 0 0 1px rgba(244,192,77,.5), 0 14px 30px -16px rgba(244,192,77,.4); }
-  .row .rank-badge{ width:1.25rem; height:1.25rem; border-radius:50%; font-size:.62rem; font-weight:800; display:flex; align-items:center; justify-content:center; background:rgba(28,10,85,0.08); color:var(--text-2); }
+  .col-title h2{ margin:0; font-size:1.05rem; font-weight:700; color:var(--text-0); }
+  .col-title span.sub{ color:var(--text-2); font-size:.66rem; font-weight:600; margin-left:.25rem; text-transform:uppercase; letter-spacing:.03em; }
+  .rows{ flex:1 1 auto; min-height:0; overflow:hidden; display:flex; flex-direction:column; gap:.2rem; justify-content:flex-start; }
+  .row{ display:grid; grid-template-columns:1.3rem 1fr auto; align-items:center; gap:.5rem; padding:.2rem .5rem; border-radius:.5rem; background:linear-gradient(180deg,#fbfaff,#f5f3ff); border:1px solid var(--line); opacity:0; transform:translateY(4px); animation:rise .45s ease forwards; }
+  .row.zero{ opacity:.5 !important; background:transparent; border-style:dashed; }
+  .row.rank1{ box-shadow:0 0 0 1px rgba(244,192,77,.5), 0 12px 26px -14px rgba(244,192,77,.4); }
+  .row .rank-badge{ width:1.1rem; height:1.1rem; border-radius:50%; font-size:.56rem; font-weight:800; display:flex; align-items:center; justify-content:center; background:rgba(28,10,85,0.08); color:var(--text-2); }
   .row.rank1 .rank-badge{ background:var(--gold); color:#241300; }
   .row.rank2 .rank-badge{ background:var(--silver); color:#fff; }
   .row.rank3 .rank-badge{ background:var(--bronze); color:#241300; }
-  .row .name{ font-weight:700; font-size:.8rem; color:var(--text-0); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .row.rank1 .name{ font-size:.92rem; }
+  .row .name{ font-weight:700; font-size:.74rem; color:var(--text-0); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .row.rank1 .name{ font-size:.84rem; }
   .row.zero .name{ font-weight:600; color:var(--text-2); }
-  .row .stats{ display:flex; flex-direction:column; align-items:flex-end; line-height:1.15; }
-  .row .stats .primary{ font-weight:800; font-size:.86rem; color:var(--text-0); }
-  .row.rank1 .stats .primary{ font-size:1.04rem; }
+  .row .stats{ display:flex; flex-direction:column; align-items:flex-end; line-height:1.1; }
+  .row .stats .primary{ font-weight:800; font-size:.78rem; color:var(--text-0); }
+  .row.rank1 .stats .primary{ font-size:.94rem; }
   .row.zero .stats .primary, .row.zero .stats .secondary{ color:var(--text-2); font-weight:600; }
   .vas .row.rank1 .stats .primary{ background:var(--vas-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .outbound .row.rank1 .stats .primary{ background:var(--outbound-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .payments .row.rank1 .stats .primary{ background:var(--payments-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .callcenter .row.rank1 .stats .primary{ background:var(--callcenter-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .row .stats .secondary{ font-size:.62rem; color:var(--text-2); font-weight:600; }
+  .row .stats .secondary{ font-size:.56rem; color:var(--text-2); font-weight:600; }
   @keyframes rise{ to{ opacity:1; transform:translateY(0);} }
-  .empty-state{ flex:1; display:flex; align-items:center; justify-content:center; color:var(--text-2); font-size:.85rem; text-align:center; padding:2rem; }
-  footer{ flex:0 0 auto; margin-top:.9rem; display:flex; justify-content:space-between; color:var(--text-2); font-size:.7rem; border-top:1px solid var(--line); padding-top:.6rem; }
+  .empty-state{ flex:1; display:flex; align-items:center; justify-content:center; color:var(--text-2); font-size:.8rem; text-align:center; padding:1rem; }
+  footer{ flex:0 0 auto; margin-top:.6rem; display:flex; justify-content:space-between; color:var(--text-2); font-size:.62rem; border-top:1px solid var(--line); padding-top:.45rem; }
 </style>
 </head>
 <body>
@@ -110,6 +122,7 @@
       <div><b>August 2026</b> · <span class="pill">Snapshot</span></div>
     </div>
   </header>
+  <div class="hero" id="hero"></div>
   <div class="grid">
     <section class="col vas" id="col-vas"></section>
     <section class="col payments" id="col-payments"></section>
@@ -167,8 +180,7 @@
         {"name": "Roaa Hazem", "value": 199.00, "count": 1},
         {"name": "Safaa Abuhejleh", "value": 199.00, "count": 1},
         {"name": "hussein waleed", "value": 0.00, "count": 0},
-        {"name": "Omnia Gasem", "value": 0.00, "count": 0},
-        {"name": "Rana ElSaftawy", "value": 0.00, "count": 0}
+        {"name": "Omnia Gasem", "value": 0.00, "count": 0}
       ]
     },
     {
@@ -194,6 +206,39 @@
 const snapshot = JSON.parse(document.getElementById("snapshot-data").textContent);
 function fmtMoney(v){ return "AED " + v.toLocaleString(undefined, { maximumFractionDigits: 0 }); }
 function fmtCount(v){ return v + (v === 1 ? " deal" : " deals"); }
+
+function buildHero(){
+  const el = document.getElementById("hero");
+  let best = { revenue: null, deals: null };
+  snapshot.teams.forEach(team => {
+    team.members.forEach(m => {
+      if (!best.revenue || m.value > best.revenue.value) best.revenue = { ...m, team: team.title };
+      if (!best.deals || m.count > best.deals.count) best.deals = { ...m, team: team.title };
+    });
+  });
+  if (!best.revenue || !best.deals) { el.innerHTML = ""; return; }
+  el.innerHTML = `
+    <div class="hero-card revenue-hero">
+      <div class="hero-medal">🏆</div>
+      <div class="hero-mid">
+        <div class="hero-label">Highest Revenue</div>
+        <div class="hero-name">${best.revenue.name}</div>
+        <div class="hero-team">${best.revenue.team}</div>
+      </div>
+      <div class="hero-value">${fmtMoney(best.revenue.value)}</div>
+    </div>
+    <div class="hero-card deals-hero">
+      <div class="hero-medal">🏆</div>
+      <div class="hero-mid">
+        <div class="hero-label">Highest Deal Count</div>
+        <div class="hero-name">${best.deals.name}</div>
+        <div class="hero-team">${best.deals.team}</div>
+      </div>
+      <div class="hero-value">${fmtCount(best.deals.count)}</div>
+    </div>
+  `;
+}
+
 function buildCard(team){
   const el = document.getElementById("col-" + team.key);
   if (!el) return;
@@ -203,7 +248,7 @@ function buildCard(team){
     const zeroCls = isZero ? "zero" : "";
     const primary = team.rankBy === "value" ? fmtMoney(m.value) : fmtCount(m.count);
     const secondary = team.rankBy === "value" ? fmtCount(m.count) : fmtMoney(m.value);
-    return `<div class="row ${rankCls} ${zeroCls}" style="animation-delay:${i*45}ms">
+    return `<div class="row ${rankCls} ${zeroCls}" style="animation-delay:${i*40}ms">
       <div class="rank-badge">${i+1}</div>
       <div class="name">${m.name}</div>
       <div class="stats"><div class="primary">${primary}</div><div class="secondary">${secondary}</div></div>
@@ -215,9 +260,10 @@ function buildCard(team){
       <h2>${team.title}</h2>
       <span class="sub">${team.metricLabel}</span>
     </div>
-    <div class="rows">${team.members.length ? rowsHtml : '<div class="empty-state">No won deals recorded yet this month.</div>'}</div>
+    <div class="rows">${team.members.length ? rowsHtml : '<div class="empty-state">No agents assigned to this team.</div>'}</div>
   `;
 }
+buildHero();
 snapshot.teams.forEach(buildCard);
 const generated = new Date(snapshot.generatedAtUtc);
 document.getElementById("totals").textContent = "Total: " + fmtMoney(snapshot.grandTotalRevenue) + " · " + snapshot.grandTotalDeals + " deals won · Snapshot pushed " + generated.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
