@@ -63,23 +63,26 @@
   .outbound .col-title .icon{ background:var(--outbound-grad); }
   .col-title h2{ margin:0; font-size:1.18rem; font-weight:700; color:var(--text-0); }
   .col-title span.sub{ color:var(--text-2); font-size:.74rem; font-weight:600; margin-left:.3rem; text-transform:uppercase; letter-spacing:.04em; }
-  .rows{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column; gap:.4rem; justify-content:center; }
-  .row{ display:grid; grid-template-columns:1.7rem 1fr auto; align-items:center; gap:.6rem; padding:.42rem .65rem; border-radius:.65rem; background:linear-gradient(180deg,#fbfaff,#f5f3ff); border:1px solid var(--line); opacity:0; transform:translateY(6px); animation:rise .5s ease forwards; }
+  .rows{ flex:1 1 auto; min-height:0; display:flex; flex-direction:column; gap:.26rem; justify-content:center; }
+  .row{ display:grid; grid-template-columns:1.5rem 1fr auto; align-items:center; gap:.55rem; padding:.28rem .55rem; border-radius:.55rem; background:linear-gradient(180deg,#fbfaff,#f5f3ff); border:1px solid var(--line); opacity:0; transform:translateY(6px); animation:rise .5s ease forwards; }
+  .row.zero{ opacity:.55 !important; background:transparent; border-style:dashed; }
   .row.rank1{ box-shadow:0 0 0 1px rgba(244,192,77,.5), 0 14px 30px -16px rgba(244,192,77,.4); }
-  .row .rank-badge{ width:1.4rem; height:1.4rem; border-radius:50%; font-size:.68rem; font-weight:800; display:flex; align-items:center; justify-content:center; background:rgba(28,10,85,0.08); color:var(--text-2); }
+  .row .rank-badge{ width:1.25rem; height:1.25rem; border-radius:50%; font-size:.62rem; font-weight:800; display:flex; align-items:center; justify-content:center; background:rgba(28,10,85,0.08); color:var(--text-2); }
   .row.rank1 .rank-badge{ background:var(--gold); color:#241300; }
   .row.rank2 .rank-badge{ background:var(--silver); color:#fff; }
   .row.rank3 .rank-badge{ background:var(--bronze); color:#241300; }
-  .row .name{ font-weight:700; font-size:.86rem; color:var(--text-0); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .row.rank1 .name{ font-size:.96rem; }
-  .row .stats{ display:flex; flex-direction:column; align-items:flex-end; line-height:1.2; }
-  .row .stats .primary{ font-weight:800; font-size:.92rem; color:var(--text-0); }
-  .row.rank1 .stats .primary{ font-size:1.08rem; }
+  .row .name{ font-weight:700; font-size:.8rem; color:var(--text-0); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .row.rank1 .name{ font-size:.92rem; }
+  .row.zero .name{ font-weight:600; color:var(--text-2); }
+  .row .stats{ display:flex; flex-direction:column; align-items:flex-end; line-height:1.15; }
+  .row .stats .primary{ font-weight:800; font-size:.86rem; color:var(--text-0); }
+  .row.rank1 .stats .primary{ font-size:1.04rem; }
+  .row.zero .stats .primary, .row.zero .stats .secondary{ color:var(--text-2); font-weight:600; }
   .vas .row.rank1 .stats .primary{ background:var(--vas-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .outbound .row.rank1 .stats .primary{ background:var(--outbound-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .payments .row.rank1 .stats .primary{ background:var(--payments-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .callcenter .row.rank1 .stats .primary{ background:var(--callcenter-grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .row .stats .secondary{ font-size:.66rem; color:var(--text-2); font-weight:600; }
+  .row .stats .secondary{ font-size:.62rem; color:var(--text-2); font-weight:600; }
   @keyframes rise{ to{ opacity:1; transform:translateY(0);} }
   .empty-state{ flex:1; display:flex; align-items:center; justify-content:center; color:var(--text-2); font-size:.85rem; text-align:center; padding:2rem; }
   footer{ flex:0 0 auto; margin-top:.9rem; display:flex; justify-content:space-between; color:var(--text-2); font-size:.7rem; border-top:1px solid var(--line); padding-top:.6rem; }
@@ -133,7 +136,8 @@
         {"name": "Arun Simon", "value": 16198.93, "count": 11},
         {"name": "Rahul Raj", "value": 14093.00, "count": 14},
         {"name": "Abdelaziz Elrayes", "value": 7974.76, "count": 5},
-        {"name": "Mayas Alkurdi", "value": 2270.00, "count": 2}
+        {"name": "Mayas Alkurdi", "value": 2270.00, "count": 2},
+        {"name": "Khaoula Achab", "value": 0.00, "count": 0}
       ]
     },
     {
@@ -161,7 +165,10 @@
         {"name": "Yassin hesham", "value": 199.00, "count": 2},
         {"name": "Fouad Massoud", "value": 0.00, "count": 1},
         {"name": "Roaa Hazem", "value": 199.00, "count": 1},
-        {"name": "Safaa Abuhejleh", "value": 199.00, "count": 1}
+        {"name": "Safaa Abuhejleh", "value": 199.00, "count": 1},
+        {"name": "hussein waleed", "value": 0.00, "count": 0},
+        {"name": "Omnia Gasem", "value": 0.00, "count": 0},
+        {"name": "Rana ElSaftawy", "value": 0.00, "count": 0}
       ]
     },
     {
@@ -173,7 +180,9 @@
       "members": [
         {"name": "Ameen Kavil", "value": 1740.00, "count": 4},
         {"name": "Mustufa Ahmad", "value": 990.00, "count": 3},
-        {"name": "Aditya Kumar", "value": 199.00, "count": 1}
+        {"name": "Aditya Kumar", "value": 199.00, "count": 1},
+        {"name": "Anish Punnose", "value": 0.00, "count": 0},
+        {"name": "Nilesh Yadav", "value": 0.00, "count": 0}
       ]
     }
   ],
@@ -189,10 +198,12 @@ function buildCard(team){
   const el = document.getElementById("col-" + team.key);
   if (!el) return;
   const rowsHtml = team.members.map((m, i) => {
-    const rankCls = i===0?"rank1":i===1?"rank2":i===2?"rank3":"";
+    const isZero = m.value === 0 && m.count === 0;
+    const rankCls = isZero ? "" : (i===0?"rank1":i===1?"rank2":i===2?"rank3":"");
+    const zeroCls = isZero ? "zero" : "";
     const primary = team.rankBy === "value" ? fmtMoney(m.value) : fmtCount(m.count);
     const secondary = team.rankBy === "value" ? fmtCount(m.count) : fmtMoney(m.value);
-    return `<div class="row ${rankCls}" style="animation-delay:${i*45}ms">
+    return `<div class="row ${rankCls} ${zeroCls}" style="animation-delay:${i*45}ms">
       <div class="rank-badge">${i+1}</div>
       <div class="name">${m.name}</div>
       <div class="stats"><div class="primary">${primary}</div><div class="secondary">${secondary}</div></div>
