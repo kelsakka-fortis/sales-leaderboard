@@ -51,6 +51,10 @@
   .scope{ text-align:right; color:var(--text-1); font-size:.85rem; line-height:1.4; }
   .scope b{ color:var(--text-0); }
   .scope .pill{ display:inline-block; margin-top:.3rem; padding:.2rem .7rem; border:1px solid transparent; border-radius:999px; font-size:.66rem; font-weight:700; color:var(--ink); background:var(--lime-2); }
+  .board-totals{ flex:0 0 auto; display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:.6rem; }
+  .board-total-card{ display:flex; align-items:center; justify-content:space-between; gap:.6rem; padding:.45rem .9rem; border-radius:.7rem; background:#fff; border:1px solid var(--line); box-shadow:0 10px 22px -16px rgba(28,10,85,0.2); }
+  .board-total-card .btc-label{ font-size:.64rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--text-2); }
+  .board-total-card .btc-value{ font-size:1.15rem; font-weight:800; color:var(--text-0); white-space:nowrap; }
   .hero{ flex:0 0 auto; display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:.8rem; }
   .hero-card{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:.7rem; border-radius:.9rem; padding:.55rem 1rem; color:#fff; box-shadow:0 14px 30px -16px rgba(28,10,85,0.35); }
   .hero-card.revenue-hero{ background:var(--revenue-hero-grad); }
@@ -122,6 +126,7 @@
       <div><b>August 2026</b> · <span class="pill">Snapshot</span></div>
     </div>
   </header>
+  <div class="board-totals" id="board-totals"></div>
   <div class="hero" id="hero"></div>
   <div class="grid">
     <section class="col vas" id="col-vas"></section>
@@ -145,13 +150,29 @@
   {"key":"outbound","title":"Outbound Team","icon":"➤","rankBy":"value","metricLabel":"Ranked by Revenue","members":[{"name":"Ameen Kavil","value":1740.00,"count":4},{"name":"Mustufa Ahmad","value":990.00,"count":3},{"name":"Aditya Kumar","value":199.00,"count":1},{"name":"Anish Punnose","value":0.00,"count":0},{"name":"Nilesh Yadav","value":0.00,"count":0}]}
 ],
   "grandTotalRevenue": 65751.26,
-  "grandTotalDeals": 168
+  "grandTotalDeals": 168,
+  "allNamesTotalRevenue": 67781.26,
+  "allNamesTotalDeals": 169
 }
 </script>
 <script>
 const snapshot = JSON.parse(document.getElementById("snapshot-data").textContent);
 function fmtMoney(v){ return "AED " + v.toLocaleString(undefined, { maximumFractionDigits: 0 }); }
 function fmtCount(v){ return v + (v === 1 ? " deal" : " deals"); }
+
+function buildBoardTotals(){
+  const el = document.getElementById("board-totals");
+  el.innerHTML = `
+    <div class="board-total-card">
+      <span class="btc-label">Total Revenue</span>
+      <span class="btc-value">${fmtMoney(snapshot.allNamesTotalRevenue)}</span>
+    </div>
+    <div class="board-total-card">
+      <span class="btc-label">Total Deals Won</span>
+      <span class="btc-value">${fmtCount(snapshot.allNamesTotalDeals)}</span>
+    </div>
+  `;
+}
 
 function buildHero(){
   const el = document.getElementById("hero");
@@ -209,6 +230,7 @@ function buildCard(team){
     <div class="rows">${team.members.length ? rowsHtml : '<div class="empty-state">No agents assigned to this team.</div>'}</div>
   `;
 }
+buildBoardTotals();
 buildHero();
 snapshot.teams.forEach(buildCard);
 const generated = new Date(snapshot.generatedAtUtc);
