@@ -51,10 +51,14 @@
   .scope{ text-align:right; color:var(--text-1); font-size:.85rem; line-height:1.4; }
   .scope b{ color:var(--text-0); }
   .scope .pill{ display:inline-block; margin-top:.3rem; padding:.2rem .7rem; border:1px solid transparent; border-radius:999px; font-size:.66rem; font-weight:700; color:var(--ink); background:var(--lime-2); }
-  .board-totals{ flex:0 0 auto; display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:.6rem; }
-  .board-total-card{ display:flex; align-items:center; justify-content:space-between; gap:.6rem; padding:.45rem .9rem; border-radius:.7rem; background:#fff; border:1px solid var(--line); box-shadow:0 10px 22px -16px rgba(28,10,85,0.2); }
-  .board-total-card .btc-label{ font-size:.64rem; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:var(--text-2); }
-  .board-total-card .btc-value{ font-size:1.15rem; font-weight:800; color:var(--text-0); white-space:nowrap; }
+  .board-totals{ flex:0 0 auto; display:flex; justify-content:center; margin-bottom:.8rem; }
+  .board-total-banner{ display:flex; align-items:center; gap:1.6rem; padding:.5rem 1.8rem; border-radius:999px; background:linear-gradient(90deg,#1c0a55,#6c3fce 55%,#5c8a3c); box-shadow:0 16px 34px -18px rgba(28,10,85,0.45); }
+  .board-total-stat{ display:flex; align-items:center; gap:.55rem; }
+  .board-total-stat .bts-icon{ font-size:1.05rem; line-height:1; }
+  .board-total-stat .bts-text{ display:flex; flex-direction:column; line-height:1.15; }
+  .board-total-stat .bts-label{ font-size:.6rem; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:rgba(255,255,255,0.72); }
+  .board-total-stat .bts-value{ font-size:1.3rem; font-weight:800; color:#fff; white-space:nowrap; }
+  .board-total-divider{ width:1px; height:1.7rem; background:rgba(255,255,255,0.32); }
   .hero{ flex:0 0 auto; display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:.8rem; }
   .hero-card{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:.7rem; border-radius:.9rem; padding:.55rem 1rem; color:#fff; box-shadow:0 14px 30px -16px rgba(28,10,85,0.35); }
   .hero-card.revenue-hero{ background:var(--revenue-hero-grad); }
@@ -163,13 +167,22 @@ function fmtCount(v){ return v + (v === 1 ? " deal" : " deals"); }
 function buildBoardTotals(){
   const el = document.getElementById("board-totals");
   el.innerHTML = `
-    <div class="board-total-card">
-      <span class="btc-label">Total Revenue</span>
-      <span class="btc-value">${fmtMoney(snapshot.allNamesTotalRevenue)}</span>
-    </div>
-    <div class="board-total-card">
-      <span class="btc-label">Total Deals Won</span>
-      <span class="btc-value">${fmtCount(snapshot.allNamesTotalDeals)}</span>
+    <div class="board-total-banner">
+      <div class="board-total-stat">
+        <span class="bts-icon">💰</span>
+        <div class="bts-text">
+          <span class="bts-label">Total Revenue</span>
+          <span class="bts-value">${fmtMoney(snapshot.allNamesTotalRevenue)}</span>
+        </div>
+      </div>
+      <div class="board-total-divider"></div>
+      <div class="board-total-stat">
+        <span class="bts-icon">🤝</span>
+        <div class="bts-text">
+          <span class="bts-label">Total Deals Won</span>
+          <span class="bts-value">${fmtCount(snapshot.allNamesTotalDeals)}</span>
+        </div>
+      </div>
     </div>
   `;
 }
