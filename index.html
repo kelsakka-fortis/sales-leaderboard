@@ -48,9 +48,13 @@
   .brand h1{ margin:0; font-size:1.9rem; font-weight:800; letter-spacing:.01em;
     background: linear-gradient(90deg, #1c0a55, #6c3fce 60%, #5c8a3c);
     -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .scope{ text-align:right; color:var(--text-1); font-size:.85rem; line-height:1.4; }
+  .scope{ text-align:right; color:var(--text-1); font-size:.85rem; line-height:1.4; display:flex; flex-direction:column; align-items:flex-end; gap:.35rem; }
   .scope b{ color:var(--text-0); }
   .scope .pill{ display:inline-block; margin-top:.3rem; padding:.2rem .7rem; border:1px solid transparent; border-radius:999px; font-size:.66rem; font-weight:700; color:var(--ink); background:var(--lime-2); }
+  .month-toggle{ display:inline-flex; border-radius:999px; background:rgba(28,10,85,0.08); padding:.18rem; gap:.15rem; }
+  .month-toggle button{ appearance:none; border:none; background:transparent; cursor:pointer; font-family:inherit; font-size:.68rem; font-weight:700; padding:.32rem .85rem; border-radius:999px; color:var(--text-1); transition:background .15s ease, color .15s ease; }
+  .month-toggle button.active{ background:linear-gradient(90deg,#1c0a55,#6c3fce 60%,#5c8a3c); color:#fff; box-shadow:0 6px 14px -8px rgba(28,10,85,0.5); }
+  .month-toggle button:focus-visible{ outline:2px solid var(--violet); outline-offset:2px; }
   .board-totals{ flex:0 0 auto; display:flex; justify-content:center; margin-bottom:.8rem; }
   .board-total-banner{ display:flex; align-items:center; gap:1.6rem; padding:.5rem 1.8rem; border-radius:999px; background:linear-gradient(90deg,#1c0a55,#6c3fce 55%,#5c8a3c); box-shadow:0 16px 34px -18px rgba(28,10,85,0.45); }
   .board-total-stat{ display:flex; align-items:center; gap:.55rem; }
@@ -127,7 +131,11 @@
       </div>
     </div>
     <div class="scope">
-      <div><b>September 2026</b> · <span class="pill">Snapshot</span></div>
+      <div class="month-toggle" id="month-toggle">
+        <button type="button" data-period="current">This Month</button>
+        <button type="button" data-period="previous">Last Month</button>
+      </div>
+      <div><b id="scope-month-label">September 2026</b> · <span class="pill">Snapshot</span></div>
     </div>
   </header>
   <div class="board-totals" id="board-totals"></div>
@@ -139,52 +147,52 @@
     <section class="col outbound" id="col-outbound"></section>
   </div>
   <footer>
-    <span>Source: HubSpot CRM · Main Pipeline · won_time_pd within current month · Teams: VAS Inhouse, Payments Inhouse, Call Center, Outbound Team</span>
+    <span>Source: HubSpot CRM · Main Pipeline · won_time_pd within selected month · Teams: [VAS] Account Management, [VAS] BD, Payments Inhouse, Call Center, Outbound Team</span>
     <span id="totals">—</span>
   </footer>
 </div>
 <script id="snapshot-data" type="application/json">
 {
-  "generatedAtUtc": "2026-09-01T07:10:00Z",
-  "monthLabel": "September 2026",
-  "teams": [
-  {"key":"vas","title":"VAS Team","icon":"◆","rankBy":"value","metricLabel":"Ranked by Revenue","members":[]},
-  {"key":"payments","title":"Payments Team","icon":"$","rankBy":"count","metricLabel":"Ranked by Deals Won","members":[
-    {"name":"Aditya Jaiswal","value":499.00,"count":2},
-    {"name":"Donaldo Oroncillo","value":0.00,"count":0},
-    {"name":"Hala Shehab","value":0.00,"count":0},
-    {"name":"Peter Tawfik","value":0.00,"count":0},
-    {"name":"Saif Diab","value":0.00,"count":0}
-  ]},
-  {"key":"callcenter","title":"Call Center Team","icon":"☎","rankBy":"count","metricLabel":"Ranked by Deals Won","members":[
-    {"name":"Fouad Massoud","value":0.00,"count":0},
-    {"name":"hussein waleed","value":0.00,"count":0},
-    {"name":"Judy khalid","value":0.00,"count":0},
-    {"name":"Omnia Gasem","value":0.00,"count":0},
-    {"name":"Roaa Hazem","value":0.00,"count":0},
-    {"name":"Yara Mahmoud","value":0.00,"count":0},
-    {"name":"Yassin hesham","value":0.00,"count":0}
-  ]},
-  {"key":"outbound","title":"Outbound Team","icon":"➤","rankBy":"value","metricLabel":"Ranked by Revenue","members":[
-    {"name":"Aditya Kumar","value":0.00,"count":0},
-    {"name":"Ameen Kavil","value":0.00,"count":0},
-    {"name":"Anish Punnose","value":0.00,"count":0},
-    {"name":"Mustufa Ahmad","value":0.00,"count":0},
-    {"name":"Nilesh Yadav","value":0.00,"count":0}
-  ]}
-],
-  "grandTotalRevenue": 499.00,
-  "grandTotalDeals": 2,
-  "allNamesTotalRevenue": 499.00,
-  "allNamesTotalDeals": 2
+  "generatedAtUtc": "2026-09-01T08:32:48Z",
+  "periods": {
+    "current": {
+      "monthLabel": "September 2026",
+      "teams": [
+        {"key":"vas","title":"VAS Team","icon":"◆","rankBy":"value","metricLabel":"Ranked by Revenue","members":[{"name":"Abdelaziz Elrayes","value":0.00,"count":0},{"name":"Arun Simon","value":0.00,"count":0},{"name":"Khaoula Achab","value":0.00,"count":0},{"name":"Mayas Alkurdi","value":0.00,"count":0},{"name":"Rahul Raj","value":0.00,"count":0}]},
+        {"key":"payments","title":"Payments Team","icon":"$","rankBy":"count","metricLabel":"Ranked by Deals Won","members":[{"name":"Aditya Jaiswal","value":0.00,"count":1},{"name":"Donaldo Oroncillo","value":0.00,"count":0},{"name":"Hala Shehab","value":0.00,"count":0},{"name":"Peter Tawfik","value":0.00,"count":0},{"name":"Saif Diab","value":0.00,"count":0}]},
+        {"key":"callcenter","title":"Call Center Team","icon":"☎","rankBy":"count","metricLabel":"Ranked by Deals Won","members":[{"name":"Fouad Massoud","value":0.00,"count":0},{"name":"hussein waleed","value":0.00,"count":0},{"name":"Judy khalid","value":0.00,"count":0},{"name":"Omnia Gasem","value":0.00,"count":0},{"name":"Roaa Hazem","value":0.00,"count":0},{"name":"Yara Mahmoud","value":0.00,"count":0},{"name":"Yassin hesham","value":0.00,"count":0}]},
+        {"key":"outbound","title":"Outbound Team","icon":"➤","rankBy":"value","metricLabel":"Ranked by Revenue","members":[{"name":"Aditya Kumar","value":0.00,"count":0},{"name":"Ameen Kavil","value":0.00,"count":0},{"name":"Anish Punnose","value":0.00,"count":0},{"name":"Mustufa Ahmad","value":0.00,"count":0},{"name":"Nilesh Yadav","value":0.00,"count":0}]}
+      ],
+      "grandTotalRevenue": 0.00,
+      "grandTotalDeals": 1,
+      "allNamesTotalRevenue": 0.00,
+      "allNamesTotalDeals": 1
+    },
+    "previous": {
+      "monthLabel": "August 2026",
+      "teams": [
+        {"key":"vas","title":"VAS Team","icon":"◆","rankBy":"value","metricLabel":"Ranked by Revenue","members":[{"name":"Rahul Raj","value":23284.00,"count":21},{"name":"Arun Simon","value":20537.50,"count":14},{"name":"Abdelaziz Elrayes","value":7974.76,"count":5},{"name":"Khaoula Achab","value":4389.00,"count":2},{"name":"Mayas Alkurdi","value":2270.00,"count":2}]},
+        {"key":"payments","title":"Payments Team","icon":"$","rankBy":"count","metricLabel":"Ranked by Deals Won","members":[{"name":"Donaldo Oroncillo","value":4928.00,"count":41},{"name":"Aditya Jaiswal","value":6337.00,"count":35},{"name":"Peter Tawfik","value":3060.00,"count":32},{"name":"Saif Diab","value":3103.00,"count":20},{"name":"Hala Shehab","value":950.00,"count":18}]},
+        {"key":"callcenter","title":"Call Center Team","icon":"☎","rankBy":"count","metricLabel":"Ranked by Deals Won","members":[{"name":"Yara Mahmoud","value":349.00,"count":4},{"name":"Yassin hesham","value":349.00,"count":4},{"name":"Judy khalid","value":1824.00,"count":3},{"name":"Omnia Gasem","value":190.00,"count":2},{"name":"Roaa Hazem","value":199.00,"count":1},{"name":"Fouad Massoud","value":0.00,"count":0},{"name":"hussein waleed","value":0.00,"count":0}]},
+        {"key":"outbound","title":"Outbound Team","icon":"➤","rankBy":"value","metricLabel":"Ranked by Revenue","members":[{"name":"Ameen Kavil","value":1740.00,"count":4},{"name":"Mustufa Ahmad","value":990.00,"count":3},{"name":"Anish Punnose","value":857.14,"count":2},{"name":"Aditya Kumar","value":199.00,"count":1},{"name":"Nilesh Yadav","value":0.00,"count":0}]}
+      ],
+      "grandTotalRevenue": 83530.40,
+      "grandTotalDeals": 214,
+      "allNamesTotalRevenue": 83530.40,
+      "allNamesTotalDeals": 214
+    }
+  }
 }
 </script>
 <script>
 const snapshot = JSON.parse(document.getElementById("snapshot-data").textContent);
+let activePeriod = "current";
 function fmtMoney(v){ return "AED " + v.toLocaleString(undefined, { maximumFractionDigits: 0 }); }
 function fmtCount(v){ return v + (v === 1 ? " deal" : " deals"); }
+function activeData(){ return snapshot.periods[activePeriod]; }
 
 function buildBoardTotals(){
+  const data = activeData();
   const el = document.getElementById("board-totals");
   el.innerHTML = `
     <div class="board-total-banner">
@@ -192,7 +200,7 @@ function buildBoardTotals(){
         <span class="bts-icon">💰</span>
         <div class="bts-text">
           <span class="bts-label">Total Revenue</span>
-          <span class="bts-value">${fmtMoney(snapshot.allNamesTotalRevenue)}</span>
+          <span class="bts-value">${fmtMoney(data.allNamesTotalRevenue)}</span>
         </div>
       </div>
       <div class="board-total-divider"></div>
@@ -200,7 +208,7 @@ function buildBoardTotals(){
         <span class="bts-icon">🤝</span>
         <div class="bts-text">
           <span class="bts-label">Total Deals Won</span>
-          <span class="bts-value">${fmtCount(snapshot.allNamesTotalDeals)}</span>
+          <span class="bts-value">${fmtCount(data.allNamesTotalDeals)}</span>
         </div>
       </div>
     </div>
@@ -208,9 +216,10 @@ function buildBoardTotals(){
 }
 
 function buildHero(){
+  const data = activeData();
   const el = document.getElementById("hero");
   let best = { revenue: null, deals: null };
-  snapshot.teams.forEach(team => {
+  data.teams.forEach(team => {
     team.members.forEach(m => {
       if (!best.revenue || m.value > best.revenue.value) best.revenue = { ...m, team: team.title };
       if (!best.deals || m.count > best.deals.count) best.deals = { ...m, team: team.title };
@@ -263,11 +272,29 @@ function buildCard(team){
     <div class="rows">${team.members.length ? rowsHtml : '<div class="empty-state">No agents assigned to this team.</div>'}</div>
   `;
 }
-buildBoardTotals();
-buildHero();
-snapshot.teams.forEach(buildCard);
-const generated = new Date(snapshot.generatedAtUtc);
-document.getElementById("totals").textContent = "Total: " + fmtMoney(snapshot.grandTotalRevenue) + " · " + snapshot.grandTotalDeals + " deals won · Snapshot pushed " + generated.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+
+function buildAll(){
+  const data = activeData();
+  document.getElementById("scope-month-label").textContent = data.monthLabel;
+  buildBoardTotals();
+  buildHero();
+  data.teams.forEach(buildCard);
+  const generated = new Date(snapshot.generatedAtUtc);
+  document.getElementById("totals").textContent = "Total: " + fmtMoney(data.grandTotalRevenue) + " · " + data.grandTotalDeals + " deals won · Snapshot pushed " + generated.toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+  document.querySelectorAll("#month-toggle button").forEach(b => {
+    b.classList.toggle("active", b.dataset.period === activePeriod);
+  });
+}
+
+document.querySelectorAll("#month-toggle button").forEach(b => {
+  b.addEventListener("click", () => {
+    if (b.dataset.period === activePeriod) return;
+    activePeriod = b.dataset.period;
+    buildAll();
+  });
+});
+
+buildAll();
 </script>
 </body>
 </html>
